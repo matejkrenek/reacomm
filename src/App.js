@@ -3,8 +3,6 @@ import { Route, Switch } from "react-router-dom"
 import { Home, Cart } from "./pages"
 import { Navbar } from "./components";
 
-
-
 const App = () => {
   return (
     <>

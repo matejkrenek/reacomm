@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { HiShoppingBag } from "react-icons/hi"
+import { AiOutlineShoppingCart } from "react-icons/ai"
 
 const Navbar = () => {
     return ( 
@@ -9,7 +9,7 @@ const Navbar = () => {
                     <p className="uppercase tracking-wider text-lg font-medium"><span className="white">rea</span> comm</p>
                 </Link>
                 <Link to="/cart">
-                    <HiShoppingBag className="text-2xl"></HiShoppingBag>
+                    <AiOutlineShoppingCart className="text-2xl"></AiOutlineShoppingCart>
                 </Link>
             </div>
         </nav>
