@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.loader {
+  display: inline-block;
+  border: 4px solid rgba(243, 244, 246, var(--tw-bg-opacity));
+  border-left-color: rgba(17, 24, 39, var(--tw-bg-opacity));
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: donut-spin 1.2s linear infinite;
+}
+
+.loader-lg{
+  height: 64px;
+  width: 64px;
+}
+
+@keyframes donut-spin {
+  to {
+      transform: rotate(1turn);
+  }
+}
+

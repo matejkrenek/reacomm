@@ -1,11 +1,12 @@
-import { Route, Switch } from "react-router-dom"
-
+import { Provider } from "react-redux";
+import { Route, Switch } from "react-router-dom";
+import store from "./redux/store"
 import { Home, Cart } from "./pages"
 import { Navbar } from "./components";
 
 const App = () => {
   return (
-    <>
+    <Provider store={store}>
       <Navbar />
       <Switch>
         <Route exact path="/">
@@ -15,7 +16,7 @@ const App = () => {
           <Cart />
         </Route>
       </Switch>
-    </>
+    </Provider>
   );
 }
 
