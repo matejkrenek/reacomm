@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+button{
+  outline: none;
+}
+
 .loader {
   display: inline-block;
   border: 4px solid rgba(243, 244, 246, var(--tw-bg-opacity));
@@ -15,6 +19,20 @@
 .loader-lg{
   height: 64px;
   width: 64px;
+}
+
+.loader-sm{
+  width: 18px;
+  height: 18px;
+}
+
+.loader-secondary{
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-left-color: rgba(255, 255, 255, 1);
+}
+
+.do--hover:hover .on--hover{
+  display: block;
 }
 
 @keyframes donut-spin {

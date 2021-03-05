@@ -1,16 +1,12 @@
-import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
+import { AiFillCaretDown, AiFillCaretUp, AiOutlineDelete } from "react-icons/ai";
 import { connect } from "react-redux"
 import { cartUpdate } from "../redux"
+import Loader from "./Loader";
 
-const CartItem = ({id, name, price, quantity, image, total_price, cartUpdate}) => {
-
-    const handleIncrese = (id, quantity) => {
-        console.log("fdsf")
-        cartUpdate(id, quantity)
-    }   
+const CartItem = ({id, name, price, quantity, image, total_price, cartUpdate, cartData}) => {
 
     return ( 
-        <div className="bg-gray-100	p-2 overflow-hidden flex items-center justify-between">
+        <div className="bg-gray-100	p-2 overflow-hidden flex items-center justify-between do--hover">
             <div className="flex items-center">
                 <div className="h-16 w-24 mr-4">
                     <img src={image} alt="" className="w-full h-full object-cover" />
@@ -21,12 +17,13 @@ const CartItem = ({id, name, price, quantity, image, total_price, cartUpdate}) =
                 </div>
             </div>
             <div className="flex items-center relative h-full">
+                <button className="on--hover hidden mx-4 text-red-500 text-xl p-2 rounded-full transition hover:bg-red-500 hover:text-white">{cartData.btnLoading ? <Loader classes="loader-sm loader-secondary"/> : <AiOutlineDelete />}</button>
                 <h5 className="mr-8 font-semibold">{total_price}</h5>
                 <div className="flex items-center bg-gray-200 h-full">
                     <p className="p-4">{quantity}</p>
                     <div className="bg-gray-400 text-white h-full flex flex-col items-center justify-center">
-                        <button className="hover:bg-gray-500 w-full h-full px-2" onClick={() => handleIncrese(id, quantity + 1)}><AiFillCaretUp /></button>
-                        <button className="hover:bg-gray-500 w-full h-full px-2" onClick={() => handleIncrese(id, quantity - 1)}><AiFillCaretDown /></button>
+                        <button className="hover:bg-gray-500 w-full h-full px-2" disabled={cartData.btnLoading ? true : false} onClick={() => cartUpdate(id, quantity + 1)}>{cartData.btnLoading ? <Loader classes="loader-sm loader-secondary"/> : <AiFillCaretUp />}</button>
+                        <button className="hover:bg-gray-500 w-full h-full px-2" disabled={cartData.btnLoading ? true : false} onClick={() => cartUpdate(id, quantity - 1)}>{cartData.btnLoading ? <Loader classes="loader-sm loader-secondary"/> : <AiFillCaretDown />}</button>
                     </div>
                 </div>
             </div>
