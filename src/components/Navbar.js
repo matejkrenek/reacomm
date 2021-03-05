@@ -17,7 +17,7 @@ const Navbar = ({ cartData, fetchCart }) => {
                 <Link to="/">
                     <p className="uppercase tracking-wider text-lg font-medium"><span className="white">rea</span> comm</p>
                 </Link>
-                {location.pathname !== "/cart" && <Link to="/cart" className="relative">
+                {location.pathname !== "/cart" && location.pathname !== "/checkout" && <Link to="/cart" className="relative">
                     <AiOutlineShoppingCart className="text-2xl"></AiOutlineShoppingCart>
                     <div className="absolute bg-red-500 px-1 -top-1 -right-1.5 w-auto rounded-full text-white text-xs">{cartData.cart.total_items}</div>
                 </Link>}

@@ -1,7 +1,7 @@
 import { Provider } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import store from "./redux/store"
-import { Home, Cart } from "./pages"
+import { Home, Cart, Checkout, NotFound } from "./pages"
 import { Navbar } from "./components";
 
 const App = () => {
@@ -9,12 +9,10 @@ const App = () => {
     <Provider store={store}>
       <Navbar />
       <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route exact path="/cart">
-          <Cart />
-        </Route>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/cart" component={Cart} />
+        <Route exact path="/checkout" component={Checkout} />
+        <Route component={NotFound} />
       </Switch>
     </Provider>
   );

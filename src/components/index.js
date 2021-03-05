@@ -5,3 +5,4 @@ export { default as Message } from "./Message";
 export { default as ProductItem} from "./ProductItem"
 export { default as Loader} from "./Loader"
 export { default as CartItem} from "./CartItem"
+export { default as LinkDark} from "./LinkDark"
