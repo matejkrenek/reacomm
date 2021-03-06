@@ -1,5 +1,5 @@
 import { commerce } from "../../lib/commerce"
-import { FETCH_CART_REQUEST, FETCH_CART_SUCCESS, FETCH_CART_FAILURE, CART_ADD, CART_UPDATE} from "./cartTypes"
+import { FETCH_CART_REQUEST, FETCH_CART_SUCCESS, FETCH_CART_FAILURE, CART_ADD, CART_UPDATE, CART_REMOVE} from "./cartTypes"
 
 export const fetchCartRequest = () => {
     return {
@@ -33,6 +33,12 @@ export const cartUpdateRequest = () => {
     }
 }
 
+export const cartRemoveRequest = () => {
+    return {
+        type: CART_REMOVE
+    }
+}
+
 
 export const fetchCart = () => {
     return async (dispatch) => {
@@ -63,6 +69,18 @@ export const cartUpdate = (productId, quantity) => {
         dispatch(cartUpdateRequest())
         try{
             const { cart } = await commerce.cart.update(productId, { quantity })
+            dispatch(fetchCartSuccess(cart))
+        }catch(err){
+            dispatch(fetchCartFailure(err.message))
+        }
+    }
+}
+
+export const cartRemove = (productId) => {
+    return async (dispatch) => {
+        dispatch(cartRemoveRequest())
+        try{
+            const { cart } = await commerce.cart.remove(productId)
             dispatch(fetchCartSuccess(cart))
         }catch(err){
             dispatch(fetchCartFailure(err.message))

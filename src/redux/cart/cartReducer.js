@@ -1,4 +1,4 @@
-import { FETCH_CART_REQUEST, FETCH_CART_SUCCESS, FETCH_CART_FAILURE, CART_ADD, CART_UPDATE } from "./cartTypes"
+import { FETCH_CART_REQUEST, FETCH_CART_SUCCESS, FETCH_CART_FAILURE, CART_ADD, CART_UPDATE, CART_REMOVE } from "./cartTypes"
 
 const initialState = {
     loading: false, 
@@ -34,6 +34,11 @@ const cartReducer = (state = initialState, action) => {
                 btnLoading: true
             }
         case CART_UPDATE:
+            return{
+                ...state,
+                btnLoading: true
+            }
+        case CART_REMOVE:
             return{
                 ...state,
                 btnLoading: true

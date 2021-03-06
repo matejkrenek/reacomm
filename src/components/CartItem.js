@@ -1,12 +1,12 @@
 import { AiFillCaretDown, AiFillCaretUp, AiOutlineDelete } from "react-icons/ai";
 import { connect } from "react-redux"
-import { cartUpdate } from "../redux"
+import { cartRemove, cartUpdate } from "../redux"
 import Loader from "./Loader";
 
-const CartItem = ({id, name, price, quantity, image, total_price, cartUpdate, cartData, type}) => {
+const CartItem = ({id, name, price, quantity, image, total_price, cartUpdate, cartData, type, cartRemove}) => {
 
     return ( 
-        <div className="bg-gray-100	p-2 overflow-hidden flex items-center justify-between do--hover">
+        <div className="bg-gray-200	p-2 overflow-hidden flex items-center justify-between do--hover">
             <div className="flex items-center">
                 {type !== "checkout" && 
                 <div className="h-16 w-24 mr-4">
@@ -19,7 +19,7 @@ const CartItem = ({id, name, price, quantity, image, total_price, cartUpdate, ca
             </div>
             <div className="flex items-center relative h-full">
                 {type !== "checkout" &&
-                    <button className="on--hover hidden mx-4 text-red-500 text-xl p-2 rounded-full transition hover:bg-red-500 hover:text-white">{cartData.btnLoading ? <Loader classes="loader-sm loader-secondary"/> : <AiOutlineDelete />}</button>
+                    <button className="on--hover hidden mx-4 text-red-500 text-xl p-2 rounded-full transition hover:bg-red-500 hover:text-white" onClick={() => cartRemove(id)}>{cartData.btnLoading ? <Loader classes="loader-sm loader-secondary"/> : <AiOutlineDelete />}</button>
                 }
                 <h5 className="mr-8 font-semibold">{total_price}</h5>
                 <div className="flex items-center bg-gray-200 h-full">
@@ -43,7 +43,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        cartUpdate: (productId, quantity) => dispatch(cartUpdate(productId, quantity))
+        cartUpdate: (productId, quantity) => dispatch(cartUpdate(productId, quantity)),
+        cartRemove: (productId) => dispatch(cartRemove(productId))
     }
 }
  

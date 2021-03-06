@@ -10,7 +10,7 @@ const ProductItem = ({ image, name, price, id, cartAdd, cartData}) => {
     }
 
     return ( 
-        <div className="bg-gray-100	p-4 flex flex-col justify-between">
+        <div className="bg-gray-200	p-4 flex flex-col justify-between">
             <Link to={`/product/${id}`} className="mb-2 container h-2/4">
                 <img className="object-cover w-full h-full" src={image} alt={name} draggable="false"/>
             </Link>

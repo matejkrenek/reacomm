@@ -10,6 +10,9 @@ module.exports = {
         // Simple 16 column grid
        '4': 'repeat(auto-fill, minmax(200px, 1fr))',
       }
+    },
+    height: {
+      max: "max-content"
     }
     
   },
