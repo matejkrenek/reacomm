@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { connect } from "react-redux"
-import { Title, Message, CartItem, Loader, LinkDark } from "../components";
+import { SectionHeader, Message, CartItem, Loader, LinkDark } from "../components";
 import { AiOutlineShoppingCart, AiOutlineStop } from "react-icons/ai"
 import { fetchCart } from "../redux"
 
@@ -12,15 +12,15 @@ const Cart = ({fetchCart, cartData}) => {
 
 
     return ( 
-        <div className="mt-12">
-            <div className="max-w-screen-xl mx-auto bg-white px-8">
-                <Title text="Shopping Cart" />
+        <div>
+            <div className=" bg-white ">
+                <SectionHeader content="Shopping Cart" />
                 {cartData.loading
                         ? <Loader />
                         : cartData.error
                             ? <Message text={cartData.error} icon={<AiOutlineStop className="text-6xl mb-2" />}/>
                             : cartData && cartData.cart.line_items
-                                ? <div className="grid grid-cols-1 gap-4">
+                                ? <div className="grid grid-cols-1 gap-4 px-8 max-w-screen-xl mx-auto">
                                     {cartData.cart.line_items.map(({id, name, price, quantity, media, line_total}) => (
                                         <CartItem key={id} id={id} name={name} price={price.formatted_with_symbol} quantity={quantity} image={media.source} total_price={line_total.formatted_with_code}/>
                                 ))}
