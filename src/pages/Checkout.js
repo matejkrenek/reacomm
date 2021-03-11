@@ -1,14 +1,29 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { connect } from "react-redux"
-import { ButtonDark, CartItem, LinkDark, Loader, Message, SectionHeader } from "../components";
+import { CartItem, Loader, Message, SectionHeader, ShippingForm } from "../components";
 import { fetchCart } from "../redux"
 
+const steps = ["Shipping Form", "Payment Form", "Confirmation"]
+
 const Checkout = ({ cartData, fetchCart }) => {
-    
+    const [activeStep, setActiveStep] = useState(0)
+    const [shippingData, setShippingData] = useState({})
+
     useEffect(() => {
         fetchCart()
     }, [])
+
+    const nextStep = () => setActiveStep(prevStep => prevStep + 1);
+    const backStep = () => setActiveStep(prevStep => prevStep - 1);
+
+    const next = (data) => {
+        setShippingData(data)
+        nextStep()
+    }
+
+
+    const Form = () => activeStep === 0 ? <ShippingForm submit={next}/> : <Loader />
 
     return ( 
         <div>
@@ -18,46 +33,10 @@ const Checkout = ({ cartData, fetchCart }) => {
 
                     {cartData && cartData.cart.line_items && cartData.cart.line_items.length
                         ?   <>
-                                <div className="bg-gray-200 col-span-4 p-4 h-max">
-                                    <h1 className="text-xl mb-6 font-semibold">Shipping Details</h1>
-                                    <form action="">
-                                        <div className="flex gap-8 mb-4">
-                                            <div className="flex flex-col w-2/4">
-                                                <label htmlFor="first-name" className="mb-1">First Name</label>
-                                                <input type="text" name="first-name" id="first-name" className="py-2 px-4 outline-none"/>
-                                            </div>
-                                            <div className="flex flex-col w-2/4">
-                                                <label htmlFor="last-name" className="mb-1">Last Name</label>
-                                                <input type="text" name="last-name" id="last-name" className="py-2 px-4 outline-none"/>
-                                            </div>
-                                        </div>
-                                        <div className="flex gap-8 mb-4">
-                                            <div className="flex flex-col w-2/4">
-                                                <label htmlFor="street" className="mb-1">Street Address</label>
-                                                <input type="street" name="street" id="street" className="py-2 px-4 outline-none"/>
-                                            </div>
-                                            <div className="flex flex-col w-2/4">
-                                                <label htmlFor="email" className="mb-1">Email Address</label>
-                                                <input type="email" name="email" id="email" className="py-2 px-4 outline-none"/>
-                                            </div>
-                                        </div>
-                                        <div className="flex gap-8 mb-4">
-                                            <div className="flex flex-col w-2/4">
-                                                <label htmlFor="city" className="mb-1">City</label>
-                                                <input type="city" name="city" id="city" className="py-2 px-4 outline-none"/>
-                                            </div>
-                                            <div className="flex flex-col w-2/4">
-                                                <label htmlFor="zipcode" className="mb-1">Zip Code</label>
-                                                <input type="zipcode" name="zipcode" id="zipcode" className="py-2 px-4 outline-none"/>
-                                            </div>
-                                        </div>
-                                        <div className="flex gap-8 mb-4 justify-between">
-                                            <LinkDark to="/cart" text="Back" type="outlined"/>
-                                            <ButtonDark text="Continue" />
-                                        </div>
-                                    </form>
+                                <div className="bg-gray-100 col-span-4 p-4 h-max">
+                                    <Form />
                                 </div>
-                                <div className="bg-gray-200 col-span-2 p-2 h-max">
+                                <div className="bg-gray-100 col-span-2 p-2 h-max">
                                     {cartData.loading ? <Loader classes="loader"/>
                                     : <>
                                         {cartData.cart.line_items.map(({id, name, price, quantity, line_total}) => (
